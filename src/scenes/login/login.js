@@ -7,19 +7,19 @@
  */
 
 import React from 'react';
-import {TextInput, Button, StyleSheet} from 'react-native';
-import {Container, Text, View} from 'native-base';
+import {TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, View} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const {control, handleSubmit, errors} = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => navigation.navigate('Dashboard');
 
   return (
-    <Container padder>
-      <View style={styles.view} padder>
-        <Text style={styles.heading}>Sign In</Text>
+    <View style={styles.view} padding="5%">
+      <Text style={styles.heading}>Sign In</Text>
 
+      <View style={styles.viewGroup}>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -34,8 +34,12 @@ const Login = () => {
           rules={{required: true}}
           defaultValue=""
         />
-        {errors.username && <Text>Username cannot be blank.</Text>}
+        {errors.username && (
+          <Text style={styles.textError}>Username cannot be blank.</Text>
+        )}
+      </View>
 
+      <View style={styles.viewGroup}>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -51,22 +55,35 @@ const Login = () => {
           rules={{required: true}}
           defaultValue=""
         />
-        {errors.password && <Text>Password cannot be blank.</Text>}
-
-        <Button title="Submit" onPress={handleSubmit(onSubmit)} color="green" />
+        {errors.password && (
+          <Text style={styles.textError}>Password cannot be blank.</Text>
+        )}
       </View>
-    </Container>
+
+      <TouchableOpacity
+        onPress={handleSubmit(onSubmit)}
+        style={styles.button}>
+        <Text style={styles.textButton}>Sign In</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  viewGroup: {
+    marginBottom: 15,
+  },
+
   input: {
     borderColor: '#ccc',
     borderRadius: 4,
     borderStyle: 'solid',
     borderWidth: 1,
     fontSize: 14,
-    marginBottom: 15,
     padding: 10,
   },
 
@@ -80,6 +97,24 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginBottom: 15,
     textAlign: 'center',
+  },
+
+  button: {
+    alignSelf: 'stretch',
+    backgroundColor: 'green',
+    borderRadius: 4,
+    paddingVertical: 10,
+  },
+
+  textButton: {
+    color: 'white',
+    textAlign: 'center',
+  },
+
+  textError: {
+    color: 'red',
+    fontSize: 14,
+    marginTop: 10,
   },
 });
 

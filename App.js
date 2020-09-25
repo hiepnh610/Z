@@ -7,20 +7,29 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import Login from './src/scenes/login';
+import {ROUTERS} from './src/constants/router';
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Login />
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        {ROUTERS.map((router) => {
+          return (
+            <Stack.Screen
+              key={router.name}
+              name={router.name}
+              component={router.component}
+              options={router.options}
+            />
+          );
+        })}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
