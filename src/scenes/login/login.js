@@ -28,6 +28,8 @@ const Login = ({navigation}) => {
               onChangeText={(textValue) => onChange(textValue)}
               value={value}
               style={styles.input}
+              autoCapitalize={'none'}
+              autoCorrect={false}
             />
           )}
           name="username"
@@ -49,6 +51,8 @@ const Login = ({navigation}) => {
               value={value}
               secureTextEntry={true}
               style={styles.input}
+              autoCapitalize={'none'}
+              autoCorrect={false}
             />
           )}
           name="password"
@@ -60,9 +64,7 @@ const Login = ({navigation}) => {
         )}
       </View>
 
-      <TouchableOpacity
-        onPress={handleSubmit(onSubmit)}
-        style={styles.button}>
+      <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
         <Text style={styles.textButton}>Sign In</Text>
       </TouchableOpacity>
     </View>
