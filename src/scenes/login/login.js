@@ -10,10 +10,18 @@ import React from 'react';
 import {TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, View} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
+import {connect} from 'react-redux';
 
-const Login = ({navigation}) => {
+import ACTIONS from 'src/store/actions';
+
+const Login = ({navigation, dispatch}) => {
   const {control, handleSubmit, errors} = useForm();
-  const onSubmit = (data) => navigation.navigate('Dashboard');
+  const onSubmit = (data) => {
+    dispatch({
+      type: ACTIONS.AUTH_ACTION.SET_SIGNED_IN,
+      payload: true,
+    });
+  };
 
   return (
     <View style={styles.view} padding="5%">
@@ -120,4 +128,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapStateToProps = (state) => {
+  const {token} = state;
+
+  return {token};
+};
+
+export default connect(mapStateToProps)(Login);

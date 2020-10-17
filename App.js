@@ -7,30 +7,36 @@
  */
 
 import React from 'react';
+import {Provider} from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
+import {createStore} from 'redux';
+import devToolsEnhancer from 'remote-redux-devtools';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import Navigation from './src/navigations';
+import rootReducer from './src/store/reducers';
+import ROOT_ACTIONS from './src/store/actions';
 
-import {ROUTERS} from './src/constants/router';
-
-const Stack = createStackNavigator();
+const store = createStore(rootReducer, devToolsEnhancer());
 
 const App = () => {
+  AsyncStorage.getItem('token', (token) => {
+    if (token) {
+      store.dispatch({
+        type: ROOT_ACTIONS.AUTH_ACTION.SET_TOKEN,
+        payload: token,
+      });
+
+      store.dispatch({
+        type: ROOT_ACTIONS.AUTH_ACTION.SET_SIGNED_IN,
+        payload: true,
+      });
+    }
+  });
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        {ROUTERS.map((router) => {
-          return (
-            <Stack.Screen
-              key={router.name}
-              name={router.name}
-              component={router.component}
-              options={router.options}
-            />
-          );
-        })}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
   );
 };
 

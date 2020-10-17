@@ -1,13 +1,14 @@
 import Login from 'src/scenes/login';
 import Dashboard from 'src/scenes/dashboard';
 
-export const ROUTERS = [
+export const SCREENS = [
   {
     name: 'Login',
     component: Login,
     options: {
       headerShown: false,
     },
+    auth: false,
   },
 
   {
@@ -16,5 +17,6 @@ export const ROUTERS = [
     options: {
       headerShown: false,
     },
+    auth: true,
   },
 ];
