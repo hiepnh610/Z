@@ -7,13 +7,15 @@
  */
 
 import React from 'react';
-import {TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import {TextInput, TouchableOpacity} from 'react-native';
 import {Text, View} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ACTIONS from 'src/store/actions';
+import {GENERAL_STYLES} from 'src/styles';
+import {COMPONENT_STYLES} from './styles';
 
 const Login = ({dispatch}) => {
   const {control, handleSubmit, errors} = useForm();
@@ -25,10 +27,10 @@ const Login = ({dispatch}) => {
   };
 
   return (
-    <View style={styles.view} padding="5%">
-      <Text style={styles.heading}>Sign In</Text>
+    <View style={GENERAL_STYLES.MIDDLE_CONTENT} padding="5%">
+      <Text style={COMPONENT_STYLES.HEADING}>Sign In</Text>
 
-      <View style={styles.viewGroup}>
+      <View style={GENERAL_STYLES.MARGIN_BOTTOM_15}>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -36,7 +38,7 @@ const Login = ({dispatch}) => {
               onBlur={onBlur}
               onChangeText={(textValue) => onChange(textValue)}
               value={value}
-              style={styles.input}
+              style={GENERAL_STYLES.FORM_CONTROL}
               autoCapitalize={'none'}
               autoCorrect={false}
             />
@@ -46,11 +48,13 @@ const Login = ({dispatch}) => {
           defaultValue=""
         />
         {errors.username && (
-          <Text style={styles.textError}>Username cannot be blank.</Text>
+          <Text style={GENERAL_STYLES.TEXT_ERROR}>
+            Username cannot be blank.
+          </Text>
         )}
       </View>
 
-      <View style={styles.viewGroup}>
+      <View style={GENERAL_STYLES.MARGIN_BOTTOM_15}>
         <Controller
           control={control}
           render={({onChange, onBlur, value}) => (
@@ -59,7 +63,7 @@ const Login = ({dispatch}) => {
               onChangeText={(textValue) => onChange(textValue)}
               value={value}
               secureTextEntry={true}
-              style={styles.input}
+              style={GENERAL_STYLES.FORM_CONTROL}
               autoCapitalize={'none'}
               autoCorrect={false}
             />
@@ -69,65 +73,20 @@ const Login = ({dispatch}) => {
           defaultValue=""
         />
         {errors.password && (
-          <Text style={styles.textError}>Password cannot be blank.</Text>
+          <Text style={GENERAL_STYLES.TEXT_ERROR}>
+            Password cannot be blank.
+          </Text>
         )}
       </View>
 
-      <TouchableOpacity onPress={handleSubmit(onSubmit)} style={styles.button}>
-        <Text style={styles.textButton}>Sign In</Text>
+      <TouchableOpacity
+        onPress={handleSubmit(onSubmit)}
+        style={GENERAL_STYLES.PRIMARY_BUTTON}>
+        <Text style={GENERAL_STYLES.TEXT_PRIMARY_BUTTON}>Sign In</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-
-  viewGroup: {
-    marginBottom: 15,
-  },
-
-  input: {
-    borderColor: '#ccc',
-    borderRadius: 4,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    fontSize: 14,
-    padding: 10,
-  },
-
-  view: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-
-  heading: {
-    fontSize: 30,
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-
-  button: {
-    alignSelf: 'stretch',
-    backgroundColor: 'green',
-    borderRadius: 4,
-    paddingVertical: 10,
-  },
-
-  textButton: {
-    color: 'white',
-    textAlign: 'center',
-  },
-
-  textError: {
-    color: 'red',
-    fontSize: 14,
-    marginTop: 10,
-  },
-});
 
 const mapStateToProps = (state) => {
   const {token} = state;
