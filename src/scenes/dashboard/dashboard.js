@@ -20,4 +20,6 @@ const Dashboard = () => {
   );
 };
 
+Dashboard.propTypes = {};
+
 export default Dashboard;

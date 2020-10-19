@@ -9,23 +9,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import {createStore, applyMiddleware} from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import logger from 'redux-logger';
-import {composeWithDevTools} from 'remote-redux-devtools';
 
-import Navigation from './src/navigations';
-import rootReducer from './src/store/reducers';
-import rootSaga from './src/store/saga';
+import Navigation from './src/navigation';
+import store from './src/store';
 import ROOT_ACTIONS from './src/store/actions';
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
-);
-
-sagaMiddleware.run(rootSaga);
 
 const App = () => {
   AsyncStorage.getItem('token', (token) => {

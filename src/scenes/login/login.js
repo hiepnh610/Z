@@ -11,10 +11,11 @@ import {TextInput, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, View} from 'native-base';
 import {useForm, Controller} from 'react-hook-form';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 import ACTIONS from 'src/store/actions';
 
-const Login = ({navigation, dispatch}) => {
+const Login = ({dispatch}) => {
   const {control, handleSubmit, errors} = useForm();
   const onSubmit = (data) => {
     dispatch({
@@ -132,6 +133,10 @@ const mapStateToProps = (state) => {
   const {token} = state;
 
   return {token};
+};
+
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps)(Login);
