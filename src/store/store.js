@@ -3,12 +3,12 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-import rootReducer from './reducers';
+import ROOT_REDUCER from './reducers';
 import rootSaga from './saga';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
-  rootReducer,
+  ROOT_REDUCER,
   composeWithDevTools(applyMiddleware(sagaMiddleware, logger)),
 );
 

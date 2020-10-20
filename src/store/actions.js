@@ -1,7 +1,9 @@
-import authActions from './auth/actions';
+import AUTH_ACTIONS from './auth/actions';
+import ERROR_ACTIONS from './error/actions';
 
-const INIT_ACTIONS = {
-  AUTH_ACTION: authActions,
+const ROOT_ACTIONS = {
+  AUTH_ACTIONS,
+  ERROR_ACTIONS,
 };
 
-export default INIT_ACTIONS;
+export default ROOT_ACTIONS;

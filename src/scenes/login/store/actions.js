@@ -1,0 +1,5 @@
+const LOGIN_ACTION = {
+  LOGIN: 'LOGIN_COMPONENT/LOGIN',
+};
+
+export default LOGIN_ACTION;

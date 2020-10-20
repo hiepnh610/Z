@@ -13,16 +13,16 @@ import {useForm, Controller} from 'react-hook-form';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ACTIONS from 'src/store/actions';
+import LOGIN_ACTIONS from './store/actions';
 import {GENERAL_STYLES} from 'src/styles';
 import {COMPONENT_STYLES} from './styles';
 
 const Login = ({dispatch}) => {
   const {control, handleSubmit, errors} = useForm();
-  const onSubmit = (data) => {
+  const onSubmit = (formData) => {
     dispatch({
-      type: ACTIONS.AUTH_ACTION.SET_SIGNED_IN,
-      payload: true,
+      type: LOGIN_ACTIONS.LOGIN,
+      payload: formData,
     });
   };
 

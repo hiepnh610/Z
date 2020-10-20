@@ -1,15 +1,15 @@
-import authState from './states';
-import ACTIONS from './actions';
+import AUTH_STATE from './states';
+import AUTH_ACTIONS from './actions';
 
-const authReducer = (state = authState, action) => {
+const AUTH_REDUCER = (state = AUTH_STATE, action) => {
   switch (action.type) {
-    case ACTIONS.ADD_TOKEN:
+    case AUTH_ACTIONS.ADD_TOKEN:
       return {
         ...state,
         token: action.payload,
       };
 
-    case ACTIONS.SET_SIGNED_IN:
+    case AUTH_ACTIONS.SET_SIGNED_IN:
       return {
         ...state,
         isSignedIn: action.payload,
@@ -20,4 +20,4 @@ const authReducer = (state = authState, action) => {
   }
 };
 
-export default authReducer;
+export default AUTH_REDUCER;

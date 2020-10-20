@@ -1,6 +1,6 @@
-const INITIAL_STATE = {
+const AUTH_STATE = {
   token: '',
   isSignedIn: false,
 };
 
-export default INITIAL_STATE;
+export default AUTH_STATE;
