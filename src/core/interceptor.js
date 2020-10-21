@@ -4,6 +4,7 @@ import ROOT_ACTIONS from 'src/store/actions';
 
 const httpInterceptor = (store) => {
   axios.defaults.baseURL = 'http://localhost:3000';
+  axios.defaults.headers.common.device = 'Mobile';
 
   axios.interceptors.response.use(
     function (response) {

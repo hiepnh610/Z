@@ -17,7 +17,7 @@ import LOGIN_ACTIONS from './store/actions';
 import {GENERAL_STYLES} from 'src/styles';
 import {COMPONENT_STYLES} from './styles';
 
-const Login = ({dispatch}) => {
+const Login = ({dispatch, generalError}) => {
   const {control, handleSubmit, errors} = useForm();
   const onSubmit = (formData) => {
     dispatch({
@@ -72,9 +72,9 @@ const Login = ({dispatch}) => {
           rules={{required: true}}
           defaultValue=""
         />
-        {errors.password && (
+        {(errors.password || !!generalError.errorMessage) && (
           <Text style={GENERAL_STYLES.TEXT_ERROR}>
-            Password cannot be blank.
+            {generalError.errorMessage || 'Password cannot be blank.'}
           </Text>
         )}
       </View>
@@ -89,9 +89,9 @@ const Login = ({dispatch}) => {
 };
 
 const mapStateToProps = (state) => {
-  const {token} = state;
+  const {generalError} = state;
 
-  return {token};
+  return {generalError};
 };
 
 Login.propTypes = {

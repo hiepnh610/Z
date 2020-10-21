@@ -5,5 +5,5 @@ import ERROR_REDUCER from './error/reducer';
 
 export default combineReducers({
   auth: AUTH_REDUCER,
-  error: ERROR_REDUCER,
+  generalError: ERROR_REDUCER,
 });

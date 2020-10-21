@@ -3,7 +3,7 @@ import AUTH_ACTIONS from './actions';
 
 const AUTH_REDUCER = (state = AUTH_STATE, action) => {
   switch (action.type) {
-    case AUTH_ACTIONS.ADD_TOKEN:
+    case AUTH_ACTIONS.SET_TOKEN:
       return {
         ...state,
         token: action.payload,

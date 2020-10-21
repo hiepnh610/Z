@@ -14,10 +14,11 @@ function login(params) {
 
 function* loginSaga(action) {
   try {
-    const token = yield call(login, action.payload);
+    const response = yield call(login, action.payload);
+    const token = (response.data && response.data.token) || '';
 
     yield put({
-      type: ROOT_ACTIONS.AUTH_ACTIONS.ADD_TOKEN,
+      type: ROOT_ACTIONS.AUTH_ACTIONS.SET_TOKEN,
       payload: token,
     });
   } catch (error) {
@@ -25,8 +26,10 @@ function* loginSaga(action) {
       type: ROOT_ACTIONS.ERROR_ACTIONS.SET_ERROR_MESSAGE,
       payload: 'Error happened.',
     };
+
     const errorMessage =
       error.response && error.response.data && error.response.data.message;
+
     if (errorMessage) {
       payload.payload = errorMessage;
     }
