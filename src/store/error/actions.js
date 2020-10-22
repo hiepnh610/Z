@@ -1,5 +1,0 @@
-const ERROR_ACTIONS = {
-  SET_ERROR_MESSAGE: 'ERROR/SET_ERROR_MESSAGE',
-};
-
-export default ERROR_ACTIONS;

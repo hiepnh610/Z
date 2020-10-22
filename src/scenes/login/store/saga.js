@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import {takeLatest, call, put} from 'redux-saga/effects';
 
 import APIs from 'src/constants/apis';
@@ -21,20 +22,17 @@ function* loginSaga(action) {
       type: ROOT_ACTIONS.AUTH_ACTIONS.SET_TOKEN,
       payload: token,
     });
+
+    yield put({
+      type: ROOT_ACTIONS.AUTH_ACTIONS.SET_SIGNED_IN,
+      payload: true,
+    });
   } catch (error) {
-    const payload = {
-      type: ROOT_ACTIONS.ERROR_ACTIONS.SET_ERROR_MESSAGE,
-      payload: 'Error happened.',
-    };
-
     const errorMessage =
-      error.response && error.response.data && error.response.data.message;
+      (error.response && error.response.data && error.response.data.message) ||
+      'Error happened.';
 
-    if (errorMessage) {
-      payload.payload = errorMessage;
-    }
-
-    yield put(payload);
+    Alert.alert('Error', errorMessage, [{text: 'Close'}]);
   }
 }
 
